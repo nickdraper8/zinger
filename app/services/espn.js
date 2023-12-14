@@ -1,10 +1,5 @@
 import axios from "axios";
 
-const SWID = '{9B9BAB6D-5376-4E03-9BAB-6D53769E03F6}'
-const ESPN_S2 = 'AEBa8ekRzG7oqzI2XmJV/hxJfRZ+dXwnBwfOOxixxpVzqxDGPM1Xz+iB1nFfWvpwoBILILaJabV96cZxi34+3slkqGHyKoBjZ7DBAvDSwrmFhQokm786qJq1sFZ4DTTlmCcfqwp/th4AOv8zgdEg+xFUNerkMZ0CRsHdzokqsHVPLZfqSoFtPxhEjzlYmRexm7D5EAALG+xIsYzOHt/Z4opijrLH5rfQ9YC0FnmuEefdsjep/B7helNibfI4CKlYNqsfwTqOaI8HKVOmkkFaTcXd';
-const leagueId = 884074
-const cookie = `swid=${SWID}; espn_s2=${ESPN_S2}`;
-
 const relevantMatchupPeriodIds = [12,13,14];
 const relevantTeamIds = [5, 7, 9];
 
@@ -22,11 +17,10 @@ const ApiViews = {
 }
 
 const FantasyApiClient = axios.create({
-    baseURL: 'https://fantasy.espn.com/apis/v3/games/ffl/seasons/2023/segments/0/leagues',
+    baseURL: 'https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/2023/segments/0/leagues/884074',
     timeout: 1000,
     headers: {
         Accept: 'application/json',
-        cookie: cookie,
     }
 })
 
@@ -39,7 +33,6 @@ const getFantasyData = async (url) => {
           );
           return null;
         }
-      
         const data = response.data;
         return data;
       } catch (error) {
@@ -89,13 +82,13 @@ const normalizeTeamCumulativeScore = (matchupData, matchupPeriodIds, teamIds) =>
 }
 
 export const getCumulativeScoreData = async () => {
-    const teamDataUrl = `/${leagueId}?view=${ApiViews.mTeam}`;
-    const matchupDataUrl = `/${leagueId}?view=${ApiViews.mMatchup}`;
+    const teamDataUrl = `?view=${ApiViews.mTeam}`;
+    const matchupDataUrl = `?view=${ApiViews.mMatchup}`;
     const [teamData, matchupData] = await Promise.all([getFantasyData(teamDataUrl), getFantasyData(matchupDataUrl)])
     const teamIdMap = normalizeTeamData(teamData);
     const teamCumulativeScores = normalizeTeamCumulativeScore(matchupData, relevantMatchupPeriodIds, relevantTeamIds)
     for (const teamId in teamCumulativeScores) {
         teamCumulativeScores[teamId].teamData = teamData.teams.find(team => team.id === parseInt(teamId));
     }
-    return teamCumulativeScores;
+    return Object.values(teamCumulativeScores);
 }

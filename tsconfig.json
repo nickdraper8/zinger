@@ -22,6 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/services/espnApi.mjs", "app/constants.js", "app/services/espn.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/services/espnApi.mjs", "app/constants.js", "app/services/espn.js", "app/components/fantasy.jsx", "app/privider.jsx"],
   "exclude": ["node_modules"]
 }

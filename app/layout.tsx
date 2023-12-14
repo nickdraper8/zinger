@@ -1,13 +1,9 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
+import { Provider } from './privider'
 
 const inter = Inter({ subsets: ['latin'] })
-
-const queryClient = new QueryClient();
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -22,9 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <QueryClientProvider client={queryClient}>
+        <Provider>
           {children}
-        </QueryClientProvider>
+        </Provider>
       </body>
     </html>
   )
