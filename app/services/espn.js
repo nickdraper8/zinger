@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const relevantMatchupPeriodIds = [12,13,14];
+const relevantMatchupPeriodIds = [15,16,17];
 const relevantTeamIds = [5, 7, 9];
 
 const ApiViews = {
@@ -50,13 +50,15 @@ const normalizeTeamData = (teamData) => {
 
 const roundToTwoDecimalPlaces = (number) => Math.round(number * 100)/100;
 
-const isTeamInvolvedInMatchup = (matchup, teamId) => matchup.away.teamId === teamId || matchup.home.teamId === teamId
+const isTeamInvolvedInMatchup = (matchup, teamId) => matchup?.away?.teamId === teamId || matchup?.home?.teamId === teamId
 const getTeamMatchupScore = (matchup, teamId) => {
-    const team = matchup.away.teamId === teamId ? matchup.away : matchup.home;
+    const team = matchup?.away?.teamId === teamId ? matchup.away : matchup.home;
     if (team.totalPoints > 0) {
         return roundToTwoDecimalPlaces(team.totalPoints)
-    } else {
+    } else if (team.rosterForMatchupPeriod.appliedStatTotal) {
         return roundToTwoDecimalPlaces(team.rosterForMatchupPeriod.appliedStatTotal)
+    } else {
+        return 0;
     }
 
 }

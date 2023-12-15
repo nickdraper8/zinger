@@ -3,46 +3,80 @@
 import { useQuery } from "@tanstack/react-query";
 import { getCumulativeScoreData } from "../services/espn.js";
 import { useMemo } from "react";
+import LoadingSpinner from "./loadingSpinner.jsx"
 
 import './fantasy.css';
 
-const Team = ({ cumulativeScore, matchupPeriodScores, teamData }) => {
+const compareCumulativeScores = (a, b) => {
+    return b.cumulativeScore - a.cumulativeScore
+}
+
+const getPlaceString = (index) => {
+    if (index === 0) {
+        return '1st';
+    } else if (index === 1) {
+        return '2nd';
+    } else {
+        return '3rd';
+    }
+}
+
+const Team = ({ cumulativeScore, matchupPeriodScores, teamData, idx }) => {
+    const placeString = getPlaceString(idx)
     return (
-        <div className="team_wrapper">
-            <img src={teamData.logo} width={100} height={100} />
-            <h3>{teamData.name}</h3>
-            <p>Total points: {cumulativeScore}</p>
-            {Object.keys(matchupPeriodScores).map(key => (
-                <p>Week {key} points: {matchupPeriodScores[key]}</p>
-            ))}
+        <div className="team_item_wrapper">
+            <div className="team_item_wrapper__separator">
+                <div className="team_item_wrapper__team_identifier">
+                    <img className="team_image" src={teamData.logo} />
+                    <h3 className="team_name sub_header_1">{teamData.name}</h3>
+                </div>
+                <div className="team_item_wrapper__total_points">
+                    <p className="sub_header_1">Total points:</p>
+                    <p className="total_points">{cumulativeScore}</p>
+                </div>
+            </div>
+            <div className="team_item_wrapper__separator team_item_wrapper__matchup_score">
+                <p className={`place place--${placeString}`}>{placeString}</p>
+                <div className="team_item_wrapper__separator team_item_wrapper__matchup_score team_item_wrapper__matchup_score--wrapper">
+                    {Object.keys(matchupPeriodScores).map((key, index) => (
+                        <div key={`${key}-${index}`} className="team_item_wrapper__matchup_score team_item_wrapper__matchup_score--item">
+                            <p className="sub_header_2">Round {index + 1}:</p><p className="matchup_score">{matchupPeriodScores[key]}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
         </div>
     )
 }
 
 export const Fantasy = () => {
 
-    const { isFetching, isPending, isError, data, error } = useQuery({
+    const { isFetching, isPending, isError, data, error, refetch } = useQuery({
         queryKey: ['fantasyScores'],
         queryFn: getCumulativeScoreData,
+        refetchInterval: 60000,
     })
 
-    if (isPending) {
-        return <span>Loading...</span>
-    }
-
-    if (isError) {
-        return <span>Error: {error.message}</span>
-    }
+    const sortedTeams = useMemo(() => {
+        if (!data) return null;
+        return data.sort(compareCumulativeScores)
+    }, [data])
 
     return (
-        <div>
-            <div>Hello! This is the fantasy component</div>
-            {isFetching &&
-                <p>Fetching for up-to-date scores...</p>
-            }
-            {data && data.map(data => {
-                return <Team {...data} />
-            })}
+        <div className="fantasy_wrapper">
+            <h2>Zinger Fantasy Football League 2023</h2>
+            <h1 className="header">THE CLEAVELAND STEAMER</h1><h1 className="header">LOSER LEADERBOARD</h1>
+            <button className="refresh_button" onClick={() => refetch()}>&#8635;</button>
+            <div className={`modal${!isFetching || isPending ? ' modal--hide' : ''}`}><LoadingSpinner /></div>
+            {isError && <div className='modal'><p>Error: {error.message}</p></div>}
+            {isPending && <LoadingSpinner />}
+            {data && (
+                <div className="team_leaderboard_wrapper">
+                    {sortedTeams.map((data, idx) => {
+                        return <Team key={idx} {...data} idx={idx} />
+                    })}
+                </div>
+            )}
         </div>
     )
 }

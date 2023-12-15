@@ -25,3 +25,21 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.p-24 {
+  padding: 6rem 1rem;
+}
+
+@media only screen and (min-width: 1023px) {
+  .p-24 {
+    max-width: 1000px;
+    margin: 3rem auto;
+    padding: 0;
+  }
+}
+
+h1 {
+  font-size: xx-large;
+  font-weight: bolder;
+  text-align: center;
+}
