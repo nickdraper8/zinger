@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const relevantMatchupPeriodIds = [15,16,17];
+// const relevantMatchupPeriodIds = [13,14,15];
 const relevantTeamIds = [5, 7, 9];
 
 const ApiViews = {

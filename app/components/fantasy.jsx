@@ -6,6 +6,7 @@ import { useMemo } from "react";
 import LoadingSpinner from "./loadingSpinner.jsx"
 
 import './fantasy.css';
+import Image from "next/image.js";
 
 const compareCumulativeScores = (a, b) => {
     return b.cumulativeScore - a.cumulativeScore
@@ -64,8 +65,8 @@ export const Fantasy = () => {
 
     return (
         <div className="fantasy_wrapper">
-            <h2>Zinger Fantasy Football League 2023</h2>
-            <h1 className="header">THE CLEAVELAND STEAMER</h1><h1 className="header">LOSER LEADERBOARD</h1>
+            <Image  className="bus_image" src="/greyhound-feature-onsite.webp" height={100} width={200} alt="bus"/>
+            <h1 className="header">THE CLEVELAND STEAMER</h1><h1 className="header">LOSERBOARD</h1>
             <button className="refresh_button" onClick={() => refetch()}>&#8635;</button>
             <div className={`modal${!isFetching || isPending ? ' modal--hide' : ''}`}><LoadingSpinner /></div>
             {isError && <div className='modal'><p>Error: {error.message}</p></div>}
