@@ -16,7 +16,7 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            {'Created by Nick Draper --> Github'}
+            {'Created by Nick Draper'}
           </a>
         </div>
       </div>
@@ -25,17 +25,32 @@ export default function Home() {
 
       <div className={styles.grid}>
         <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+          href="https://fantasy.espn.com/football/league/scoreboard?leagueId=884074"
           className={styles.card}
           target="_blank"
           rel="noopener noreferrer"
         >
           <Image className="espn_logo" src="/shield-full-500.png" height={50} width={50} alt='espn-shield'/>
           <h2>
-            ESPN Scoreboard <span>-&gt;</span>
+            Scoreboard <span>-&gt;</span>
           </h2>
           <p>
             Head to the ESPN app to see more in-depth scores and stats.
+          </p>
+        </a>
+
+        <a
+          href="https://github.com/nickdraper8/zinger"
+          className={styles.card}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image className="espn_logo" src="/icone-github-violet.png" height={50} width={50} alt='github-logo'/>
+          <h2>
+            How it Works <span>-&gt;</span>
+          </h2>
+          <p>
+            See the Code in GitHub.
           </p>
         </a>
       </div>
