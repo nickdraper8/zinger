@@ -22,6 +22,7 @@
 }
 
 .header {
+    text-align: center;
     margin: .5rem 0 .25rem 0;
 }
 
@@ -131,7 +132,10 @@
     background: #2c2c2c;
 }
 
-@media only screen and (min-width: 1023px) {
+@media only screen and (min-width: 1135px) {
+    .fantasy_wrapper {
+        max-width: 1100px;
+    }
     .team_image {
         width: 100px;
         height: 100px;
@@ -174,7 +178,8 @@
 
     .bus_image {
         margin-top: 2rem;
-        width: 500px;
+        width: 400px;
+        height: 200px;
     }
     
   }

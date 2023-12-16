@@ -3,7 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getCumulativeScoreData } from "../services/espn.js";
 import { useMemo } from "react";
-import LoadingSpinner from "./loadingSpinner.jsx"
+import LoadingSpinner from "./loadingSpinner.js"
 
 import './fantasy.css';
 import Image from "next/image.js";
@@ -66,7 +66,7 @@ export const Fantasy = () => {
     return (
         <div className="fantasy_wrapper">
             <Image  className="bus_image" src="/greyhound-feature-onsite.webp" height={100} width={200} alt="bus"/>
-            <h1 className="header">THE CLEVELAND STEAMER</h1><h1 className="header">LOSERBOARD</h1>
+            <h1 className="header">THE CLEVELAND STEAMER LOSERBOARD</h1>
             <button className="refresh_button" onClick={() => refetch()}>&#8635;</button>
             <div className={`modal${!isFetching || isPending ? ' modal--hide' : ''}`}><LoadingSpinner /></div>
             {isError && <div className='modal'><p>Error: {error.message}</p></div>}
