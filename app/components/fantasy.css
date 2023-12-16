@@ -17,8 +17,14 @@
     justify-content: space-between;
     padding: 1rem;
     border-radius: 10px;
-    background: #141414;
+    background: #ffffff;
     margin: 0.25rem 0;
+}
+
+@media (prefers-color-scheme: dark) {
+    .team_item_wrapper {
+        background: #141414
+    }
 }
 
 .header {
@@ -95,11 +101,19 @@
 .modal {
     position: fixed;
     padding: 2rem 1rem;
-    border: white 2px solid;
-    background: grey;
+    border: gray 1px solid;
+    background: lightgray;
     border-radius: 10px;
     transition: .5s;
     opacity: 1;
+}
+
+
+@media (prefers-color-scheme: dark) {
+    .team_item_wrapper {
+        border: #5c5c5c 1px solid;
+        background: #1e1e1e;
+    }
 }
 
 .modal.modal--not-fixed {
@@ -112,24 +126,39 @@
 
 .refresh_button {
     position: fixed;
-    top: 8px;
-    right: 8px;
+    top: 5px;
+    right: 5px;
     z-index: 50;
     width: 60px;
     height: 60px;
     border: 1px solid grey;
+    background: white;
     border-radius: 10px;
-    background: #0e0e0e;
     transition: .25s;
     font-size: 2rem;
+    color: black;
 }
 
 .refresh_button:hover {
-    background: #1c1c1c;
+    background: lightgrey;
 }
 
 .refresh_button:active {
-    background: #2c2c2c;
+    background: grey;
+}
+
+@media (prefers-color-scheme: dark) {
+    .refresh_button{
+        background: #0e0e0e;
+        color: white;
+    }
+    .refresh_button:hover {
+        background: rgb(23, 23, 23);
+    }
+    
+    .refresh_button:active {
+        background: rgb(49, 49, 49);
+    }
 }
 
 @media only screen and (min-width: 1135px) {
