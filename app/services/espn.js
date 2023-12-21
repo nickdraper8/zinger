@@ -42,13 +42,6 @@ const getFantasyData = async (url) => {
       }
 }
 
-const normalizeTeamData = (teamData) => {
-    const dataConfig = {};
-    teamData.teams.forEach(team => {
-        dataConfig[team.id] = team;
-    })
-}
-
 const roundToTwoDecimalPlaces = (number) => Math.round(number * 100)/100;
 
 const isTeamInvolvedInMatchup = (matchup, teamId) => matchup?.away?.teamId === teamId || matchup?.home?.teamId === teamId
@@ -88,10 +81,10 @@ export const getCumulativeScoreData = async () => {
     const teamDataUrl = `?view=${ApiViews.mTeam}`;
     const matchupDataUrl = `?view=${ApiViews.mMatchup}`;
     const [teamData, matchupData] = await Promise.all([getFantasyData(teamDataUrl), getFantasyData(matchupDataUrl)])
-    const teamIdMap = normalizeTeamData(teamData);
     const teamCumulativeScores = normalizeTeamCumulativeScore(matchupData, relevantMatchupPeriodIds, relevantTeamIds)
     for (const teamId in teamCumulativeScores) {
         teamCumulativeScores[teamId].teamData = teamData.teams.find(team => team.id === parseInt(teamId));
     }
+    debugger
     return Object.values(teamCumulativeScores);
 }

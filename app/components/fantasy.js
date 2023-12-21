@@ -25,10 +25,10 @@ const getPlaceString = (index) => {
 const Team = ({ cumulativeScore, matchupPeriodScores, teamData, idx }) => {
     const placeString = getPlaceString(idx)
     return (
-        <div className="team_item_wrapper">
+        <div className={`team_item_wrapper team_item_wrapper--${idx}`}>
             <div className="team_item_wrapper__separator">
                 <div className="team_item_wrapper__team_identifier">
-                    <img className="team_image" src={teamData.logo} />
+                    <Image className="team_image" src={teamData.logo} height={100} width={200} alt={`${teamData.name}-image`}/>
                     <h3 className="team_name sub_header_1">{teamData.name}</h3>
                 </div>
                 <div className="team_item_wrapper__total_points">
