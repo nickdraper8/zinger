@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'Zinger Loserboard',
-  description: 'Zinger Fantasy Football 2023 Loserboard',
+  description: 'Zinger Fantasy Football 2024   Loserboard',
 }
 
 export default function RootLayout({ children }) {

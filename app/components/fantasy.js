@@ -7,6 +7,7 @@ import LoadingSpinner from "./loadingSpinner.js"
 
 import './fantasy.css';
 import Image from "next/image.js";
+import FallbackImage from "@/app/components/ui/FallbackImage";
 
 const compareCumulativeScores = (a, b) => {
     return b.cumulativeScore - a.cumulativeScore
@@ -28,7 +29,7 @@ const Team = ({ cumulativeScore, matchupPeriodScores, teamData, idx }) => {
         <div className={`team_item_wrapper team_item_wrapper--${idx}`}>
             <div className="team_item_wrapper__separator">
                 <div className="team_item_wrapper__team_identifier">
-                    <Image className="team_image" src={teamData.logo} height={100} width={200} alt={`${teamData.name}-image`}/>
+                    <FallbackImage className="team_image" src={teamData.logo} height={100} width={200} alt={`${teamData.name}-image`}/>
                     <h3 className="team_name sub_header_1">{teamData.name}</h3>
                 </div>
                 <div className="team_item_wrapper__total_points">
@@ -65,8 +66,8 @@ export const Fantasy = () => {
 
     return (
         <div className="fantasy_wrapper">
-            <Image  className="bus_image" src="/greyhound-feature-onsite.webp" height={100} width={200} alt="bus"/>
-            <h1 className="header">THE CLEVELAND STEAMER LOSERBOARD</h1>
+            <Image className="header_image" src="/beermiledonut.webp" height={200} width={200} alt="header_image"/>
+            <h1 className="header">BEER MILES DONUTS LOSERBOARD</h1>
             <button className="refresh_button" onClick={() => refetch()}>&#8635;</button>
             <div className={`modal${!isFetching || isPending ? ' modal--hide' : ''}`}><LoadingSpinner /></div>
             {isError && <div className='modal'><p>Error: {error.message}</p></div>}

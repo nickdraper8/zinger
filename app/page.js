@@ -8,7 +8,7 @@ export default function Home() {
       <div className={styles.description}>
         <p>
           Zinger Fantasy Football&nbsp;
-          <code className={styles.code}>2023</code>
+          <code className={styles.code}>2024</code>
         </p>
         <div>
           <a

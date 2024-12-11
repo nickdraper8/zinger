@@ -2,7 +2,7 @@ import axios from "axios";
 
 const relevantMatchupPeriodIds = [15,16,17];
 // const relevantMatchupPeriodIds = [13,14,15];
-const relevantTeamIds = [5, 7, 9];
+const relevantTeamIds = [6, 8];
 
 const ApiViews = {
     mTeam: 'mTeam',
@@ -18,7 +18,7 @@ const ApiViews = {
 }
 
 const FantasyApiClient = axios.create({
-    baseURL: 'https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/2023/segments/0/leagues/884074',
+    baseURL: 'https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/2024/segments/0/leagues/884074',
     timeout: 1000,
     headers: {
         Accept: 'application/json',
@@ -35,6 +35,7 @@ const getFantasyData = async (url) => {
           return null;
         }
         const data = response.data;
+        debugger
         return data;
       } catch (error) {
         console.error(`Error: ${error.message}`);

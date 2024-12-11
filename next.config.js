@@ -5,6 +5,12 @@ const nextConfig = {
       {
         hostname: 'i.imgur.com',
       },
+      {
+        hostname: 'c8.alamy.com'
+      },
+      {
+        hostname: 'scontent-lga3-1.xx.fbcdn.net'
+      }
     ],
   },
 }
