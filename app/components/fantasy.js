@@ -7,7 +7,7 @@ import LoadingSpinner from "./loadingSpinner.js"
 
 import './fantasy.css';
 import Image from "next/image.js";
-import FallbackImage from "@/app/components/ui/FallbackImage";
+import FallbackImage from "../components/ui/FallbackImage";
 
 const compareCumulativeScores = (a, b) => {
     return b.cumulativeScore - a.cumulativeScore
