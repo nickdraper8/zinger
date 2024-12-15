@@ -69,9 +69,15 @@ export const Fantasy = () => {
             <Image className="header_image" src="/beermiledonut.webp" height={200} width={200} alt="header_image"/>
             <h1 className="header">BEER MILES DONUTS LOSERBOARD</h1>
             <button className="refresh_button" onClick={() => refetch()}>&#8635;</button>
-            <div className={`modal${!isFetching || isPending ? ' modal--hide' : ''}`}><LoadingSpinner /></div>
             {isError && <div className='modal'><p>Error: {error.message}</p></div>}
-            {isPending && <LoadingSpinner />}
+            {isPending && (
+                <div className='loading_spinner_box'> 
+                    <LoadingSpinner />
+                </div>
+            )}
+            <div className={`loading_text${!isFetching || isPending ? ' loading_text--hide' : ''}`}>
+                Getting up to date scores from ESPN...
+            </div>
             {data && (
                 <div className="team_leaderboard_wrapper">
                     {sortedTeams.map((data, idx) => {

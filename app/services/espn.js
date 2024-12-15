@@ -35,7 +35,6 @@ const getFantasyData = async (url) => {
           return null;
         }
         const data = response.data;
-        debugger
         return data;
       } catch (error) {
         console.error(`Error: ${error.message}`);
