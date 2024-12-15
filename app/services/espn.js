@@ -19,7 +19,7 @@ const ApiViews = {
 
 const FantasyApiClient = axios.create({
     baseURL: 'https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/2024/segments/0/leagues/884074',
-    timeout: 1000,
+    timeout: 20000,
     headers: {
         Accept: 'application/json',
     }
@@ -86,6 +86,5 @@ export const getCumulativeScoreData = async () => {
     for (const teamId in teamCumulativeScores) {
         teamCumulativeScores[teamId].teamData = teamData.teams.find(team => team.id === parseInt(teamId));
     }
-    debugger
     return Object.values(teamCumulativeScores);
 }
